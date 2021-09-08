@@ -1,21 +1,19 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
-### Who am I?
 Hi, I'm Chris Dexter a software developer based in the UK with over 25 years of professional experience in software engineering. 
 
-Over the course of my career I've worked in all company sizes from small software houses to global enterprises and in a variety of different domains from financial to education and security.
+Over the course of my career I've worked in all company sizes from small software houses to global enterprises and in a variety of different domains from financial to education and security and currently retail.
 
-Over the years I've used many different technologies, frameworks and programming languages. Currenly I'm using C#, Angular, MongoDB and GraphQL.
+Over the years I've used many different technologies, frameworks and programming languages. But currently I'm using C#, Angular, MongoDB and GraphQL.
 
-I'm deeply passionate about Domain Driven Design, TDD and Agile and using these skills to help businesses solve their I.T problems.
+I'm deeply passionate about Domain Driven Design, TDD and Agile and using these skills to help businesses grow.
 
-I believe it's just as important to create maintainable solutions as it to deliver customer requirements, so that the customers are left with a solution that they can take forward as their business evolves and grows.
+I believe it's just as important to create maintainable solutions as it to deliver on customer requirements. Customers shoudl be left with solutions that they can take forward as their business evolves and grows, not just solve their needs today.
 
-I'm experienced in creating well structured monolithic applications, micro-service architecture and applying Domain Driven Design techniques to migrate from monoliths to micro-services.
-
+I'm experienced in creating well structured monolithic applications, micro-service architectures and applying Domain Driven Design techniques to migrate from monoliths to micro-services.
 
 ### Thanks For Stopping By
 
@@ -27,4 +25,4 @@ If you'd like to get in touch feel free to contact me using the email address be
 
 [email@domain.com](mailto:email@domain.com)
 
-https://www.linkedin.com/in/chris-dexter/
+[LinkedIn](https://www.linkedin.com/in/chris-dexter/)
