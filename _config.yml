@@ -1,12 +1,12 @@
 #
 # This file contains configuration flags to customize your site
-#.
+#
 
 # Name of your site (displayed in the header)
 name: Chris Dexter's Blog
 
 # Short bio or description (displayed in the header)
-description: A Blog About Software Development
+description: ...A Blog About Software Development
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://raw.githubusercontent.com/the-dext/the-dext.github.io/master/images/avatar.jpeg
