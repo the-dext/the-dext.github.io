@@ -2,14 +2,18 @@
 layout: post
 title: TDD - Mocking vs No Mocking - Here's Why You Should Do Both
 ---
-If you're writing unit tests you'll probably have at least heard of the debate about whether or not you should use mock objects. This debate is known as 'Classicist vs Mockist' or 'Detroid vs London', and Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
+If you're writing unit tests you'll probably have heard the debate about whether or not you should use mock objects. 
 
-Or maybe you're struggling with difficult to read and write tests because they're complex? If that's the case this article may have something for you too.
+Or maybe you're struggling with difficult to write or maintain tests because they're complex?
 
-In this article I'd like to persuade you not to choose one style over the other, but to use both styles and help you recognise when one is more appropriate than the other.
-Understanding when to use both styles of testing will help you on your TDD and DDD journey.
+In this article I'm going to attempt to show that you need both techniques in your solutions and show how understanding when to use each style of test will help you on your TDD and DDD journey.
 
-Bear in mind when reading this article that I am a proponent of Domain Driven Design and structure applications following the Onion Architecture.
+## Classicist vs Mockist
+The debate over whether or not to use mock objects is known as 'Classicist vs Mockist' or 'Detroid vs London'. Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
+
+In this article I'd like to persuade you not to choose one style over the other, but to use both styles and help you recognise when each is appropriate.
+
+Bear in mind when reading this article that I am a proponent of Domain Driven Design and structure applications following the Onion Architecture. There is going to be some DDD terminology (but not too much).
 
 ## So if it's not Classicist vs Mockist what is it?
 ## Answer: Orchestration vs Business Logic!
