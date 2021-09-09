@@ -36,6 +36,8 @@ If you were to apply functional programming terminology to these types of classe
 In my opiniion classes that do both orchestration and business logic are not something you should be seeing in good object oriented design. 
 They are procedural programming (possibly in an object oriented language) and you should avoid these like the plague.
 
+---
+
 ## Testing Orchestration
 Testing Orchestration is where mocking can be extremely useful.
 Here are some examples
@@ -54,7 +56,7 @@ Testing business logic should not involve dependecies (such as repositories for 
 
 This can be as simple as calling a method that adds two numbers and returns a result, but the real world is often more complex than this and I am willing to bet your application is too. So lets consider how you should go about testing an Aggregate
 
-### Quick Recap - Aggregates
+### A Quick Recap Of What Aggregates Are
 I won't go into all the details about what an aggregate is, but you need to understand some basics.
 * An aggregate is a collection of classes that are closely related and work together. 
 * They form a consistency boundary.
@@ -68,6 +70,8 @@ The last two points above are the most important when it comes to unit testing a
 You should write tests that perform actions against the Aggregate Root. Don't write tests that any methods on any classes that aren't the aggregate root.
 
 (If you find yourself able to call methods on your aggregate members then your aggregate is not implemented correctly).
+
+---
 
 ## The Benefits of Testing Isolated Business Logic
 By avoiding use of dependencies that require mocking your unit tests will be much simpler to write but there's another very important benefit to following these principles in that your tests will not be brittle.
@@ -91,6 +95,11 @@ The unit test is telling you that your SUT has a mix of concerns and you need to
 If you are unable to separate them for some reason - maybe the code is too complex and high risk - then consider whether unit testing is the right thing to be using.
 You may be better off having an integration or end-to-end test instead so that you can treat the class as a black box.
 
+---
+
 ## Next Time You're Writing A Unit Test
 
-When you're using TDD next time, consider the layers that you're dealing with and aim to put the right kind of code, in the right kind of layer. The TDD process should become pretty smooth when you've practiced this for a while and eventually it becomes second nature.
+Consider the layers that you're dealing with and aim to put the right kind of code, in the right kind of layer, with the right kind of unit testing.
+Notice how difficult to write tests are informing you of design issues.
+
+The TDD process should become pretty smooth when you've practiced this for a while and eventually it becomes second nature.
