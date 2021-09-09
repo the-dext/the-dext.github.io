@@ -74,9 +74,7 @@ I won't go into all the details about what an aggregate is, but you need to unde
 
 The last two points above are the most important when it comes to unit testing an aggregate.
 
-You should write tests that perform actions against the Aggregate Root. Don't write tests that any methods on any classes that aren't the aggregate root.
-
-(If you find yourself able to call methods on your aggregate members then your aggregate is not implemented correctly).
+You should write tests that perform actions against the Aggregate Root. Don't write tests for any other classes in the aggregate, only the aggregate root. This is important to allow you to refactor aggregates easily.
 
 ---
 
