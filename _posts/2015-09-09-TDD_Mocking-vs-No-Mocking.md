@@ -2,8 +2,9 @@
 layout: post
 title: TDD - Mocking vs No Mocking - Here's Why You Should Do Both
 ---
-## Intro
 If you're writing unit tests you'll probably have at least heard of the debate about whether or not you should use mock objects. This debate is known as 'Classicist vs Mockist' or 'Detroid vs London', and Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
+
+Or maybe you're struggling with difficult to read and write tests because they're complex? If that's the case this article may have something for you too.
 
 In this article I'd like to persuade you not to choose one style over the other, but to use both styles and help you recognise when one is more appropriate than the other.
 Understanding when to use both styles of testing will help you on your TDD and DDD journey.
