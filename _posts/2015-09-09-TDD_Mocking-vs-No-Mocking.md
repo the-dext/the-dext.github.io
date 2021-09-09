@@ -8,17 +8,18 @@ Or maybe you're struggling with difficult to write or maintain tests because the
 
 In this article I'm going to attempt to show that you need both techniques in your solutions and show how understanding when to use each style of test will help you on your TDD and DDD journey.
 
+Bear in mind when reading this article that I am a proponent of Domain Driven Design and structure applications following the Onion Architecture. There is going to be some DDD terminology (but not too much).
+
 ## Classicist vs Mockist
 The debate over whether or not to use mock objects is known as 'Classicist vs Mockist' or 'Detroid vs London'. Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
 
 In this article I'd like to persuade you not to choose one style over the other, but to use both styles and help you recognise when each is appropriate.
 
-Bear in mind when reading this article that I am a proponent of Domain Driven Design and structure applications following the Onion Architecture. There is going to be some DDD terminology (but not too much).
+In my opinion this debate isn't helpful, there's another more useful question to consider
 
-## So if it's not Classicist vs Mockist what is it?
-## Answer: Orchestration vs Business Logic!
+## Orchestration vs Business Logic!
 When you are testing a class (from here on I'll call this class the 'SUT' - the Subject Under Test) the class and the layer that it is within should fall into one of two categories
-- Orchestrator
+- Orchestration
 - Business Logic
 
 ### The Orchestrator Classes
