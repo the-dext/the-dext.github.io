@@ -2,7 +2,7 @@
 layout: post
 title: TDD - Mocking vs No Mocking - Here's Why You Should Do Both
 ---
-> This article is still in draft and is being revised and tweaked
+(This article is still in draft and is subject to revision)
 
 If you're writing unit tests you'll probably have heard the debate about whether or not you should use mock objects. 
 
