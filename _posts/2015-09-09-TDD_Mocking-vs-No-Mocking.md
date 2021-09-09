@@ -8,7 +8,7 @@ Or maybe you're struggling with difficult to write or maintain tests because the
 
 In this article I'm going to attempt to show that you need both techniques in your solutions and show how understanding when to use each style of test will help you on your TDD and DDD journey.
 
-Bear in mind when reading this article that I am a proponent of Domain Driven Design and structure applications following the Onion Architecture. There is going to be some DDD terminology (but not too much).
+Bear in mind when reading this article that I am a huge advocate of Domain Driven Design and structure applications following the Onion Architecture. There is going to be some DDD terminology (but not too much).
 
 ## Classicist vs Mockist
 The debate over whether or not to use mock objects is known as 'Classicist vs Mockist' or 'Detroid vs London'. Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
