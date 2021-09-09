@@ -1,6 +1,6 @@
 ---
 layout: post
-title: TDD - 2015-09-09-Mocking-vs-No-Mocking-Why_You_Should_Use_Both
+title: TDD - Mocking vs No Mocking - Here's Why You Should Do Both
 ---
 ## Intro
 If you're writing unit tests you'll probably have at least heard of the debate about whether or not you should use mock objects. This debate is known as 'Classicist vs Mockist' or 'Detroid vs London', and Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
