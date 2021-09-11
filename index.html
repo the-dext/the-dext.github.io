@@ -7,10 +7,18 @@ layout: default
     <article class="post">
 
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+      <div class="tags-container clearfix" >
+        {% if post.draft %}
+          <div class="draft-excerpt-line" style="display: inline-block;">Draft</div>
+        {% endif %}
 
-      <div class="entry">
-        {{ post.draft }}
-        {{ post.excerpt }}
+        {% for tag in post.tags %}
+          <div class="tags-excerpt-line">{{tag}}</div>
+        {% endfor %}
+      </div>
+      <div><br/</div>
+      <div class="entry clearfix">        
+        {{ post.excerpt }}        
       </div>      
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
     </article>

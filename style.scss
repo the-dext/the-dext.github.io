@@ -152,6 +152,7 @@ img {
 
 .wrapper-masthead {
   margin-bottom: 50px;
+  background-color: #f6f6f6;
 }
 
 .masthead {
@@ -280,6 +281,53 @@ nav {
 
 footer {
   padding: 20px 0;
+  text-align: center;
+}
+
+.post-tags {
+  display: inline-block; 
+  margin-right: 3px;   
+  background-color: rgb(255, 255, 161); 
+  color:rgb(87, 84, 84); 
+  font-size: medium;
+  border: 3px solid rgb(255, 255, 161);
+  text-align: center;
+  padding:.2em;
+  border-radius: 25px;
+}
+
+.tags-excerpt-line
+{
+  float: left; 
+  margin-left: 1.5px;   
+  margin-right: 3px;   
+  background-color: rgb(255, 255, 161); 
+  color:rgb(87, 84, 84); 
+  font-size: x-small;
+  border: 3px solid rgb(255, 255, 161);
+  text-align: center;
+  padding:.2em;
+  border-radius: 25px;
+}
+
+.draft-excerpt-line
+{
+  float: left; 
+  clear: right;
+  border: 3px solid #f44;
+  border-radius: 25px;
+  color: #f44;
+  padding:.2em;
+  font-size: x-small;
+  text-align: center;
+}
+
+.draft-warning
+{
+  border: 3px solid #f44;
+  border-radius: 25px;
+  color: #f44;
+  padding:.5em;
   text-align: center;
 }
 
