@@ -73,7 +73,7 @@ I won't go into all the details about what an aggregate is, but you need to unde
 >
 >* Actions are performed against the aggregate root, not the aggregate members.
 >
->* They are a black box (they encapsulate behavior)
+>* They are a black box (they encapsulate behaviour)
 
 The last two points above are the most important when it comes to unit testing an aggregate.
 
