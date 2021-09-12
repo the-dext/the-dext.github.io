@@ -2,6 +2,7 @@
 layout: post
 title: "TDD: Mocking vs No Mocking <br/>- Here's Why You Should Do Both"
 draft: false
+publish: true
 tags: C# dotNet TDD Test-Driven-Development Domain-Driven-Design
 ---
 If you're writing unit tests you'll probably have heard the debate about whether or not you should use mock objects. 
@@ -15,7 +16,7 @@ Bear in mind when reading this article that I am a huge advocate of Domain Drive
 ---
 
 ## Classicist vs Mockist
-The debate over whether or not to use mock objects is known as 'Classicist vs Mockist' or 'Detroid vs London'. Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
+The debate over whether or not to use mock objects is known as 'Classicist vs Mockist' or 'Detroit vs London'. Martin Fowler wrote about this extensively in his blog which you can read more about [right here](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting).
 
 In this article I'd like to persuade you not to choose one style over the other, but to use both styles and help you recognise when each is appropriate.
 
@@ -37,7 +38,7 @@ The business logic classes should live in your Domain layer. These are the brain
 If you were to apply functional programming terminology to these types of classes, many of them would be 'pure', because given the same state and the same actions, the result would always be the same.
 
 ### Classes That Do Both
-In my opiniion classes that do both orchestration and business logic are not something you should be seeing in good object oriented design. 
+In my opinion classes that do both orchestration and business logic are not something you should be seeing in good object oriented design. 
 They are procedural programming (possibly in an object oriented language) and you should avoid these like the plague.
 
 ---
@@ -56,7 +57,7 @@ Notice that all the examples above would need you to verify a call on a mock, an
 If you aren't using a mock here then I would argue that you are actually writing an integration test and that they are different from unit tests.
 
 ## Testing Business Logic
-Testing business logic should not involve dependecies (such as repositories for example) and should be just about the business rules of your app.
+Testing business logic should not involve dependencies (such as repositories for example) and should be just about the business rules of your app.
 
 This can be as simple as calling a method that adds two numbers and returns a result, but the real world is often more complex than this and I am willing to bet your application is too. So lets consider how you should go about testing an Aggregate.
 
@@ -68,11 +69,11 @@ I won't go into all the details about what an aggregate is, but you need to unde
 >
 >* They are fundamental to good Object Oriented Design.
 >
->* One class in an aggregate is the 'Aggrgate Root'
+>* One class in an aggregate is the 'Aggregate Root'
 >
 >* Actions are performed against the aggregate root, not the aggregate members.
 >
->* They are a black box (they encapsulate behaviour)
+>* They are a black box (they encapsulate behavior)
 
 The last two points above are the most important when it comes to unit testing an aggregate.
 
@@ -94,7 +95,7 @@ When your tests do not concern themselves with what is done you are free to refa
 
 With a well isolated business logic/domain layer it's perfectly reasonable to aim for **100%** code coverage. There really is no reason or excuse not to because the unit tests become simple to write.
 
-When testing orchestration or procedural code there is a deminishing return as the coverage increases and it's difficult if not impossible to reach 100% coverage. You shouldn't expect to. 
+When testing orchestration or procedural code there is a diminishing return as the coverage increases and it's difficult if not impossible to reach 100% coverage. You shouldn't expect to. 
 But in my experience that really doesn't happen with an isolated domain model.
 
 ### Tests Are Simpler

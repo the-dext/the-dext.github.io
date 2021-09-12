@@ -2,6 +2,7 @@
 layout: post
 title: "Eliminating If Statements"
 draft: true
+publish: false
 tags: C# dotNet
 ---
 This is just a quick post to demonstrate a technique for removing If/Else If and switch statements from your code. Sometimes this can make your application easier to comprehend and maintain. 
