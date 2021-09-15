@@ -11,7 +11,7 @@ Over the years I've used many different technologies, frameworks and programming
 
 I'm deeply passionate about Domain Driven Design, TDD and Agile and using these skills to help businesses grow.
 
-I believe it's just as important to create maintainable solutions as it to deliver on customer requirements. Customers shoudl be left with solutions that they can take forward as their business evolves and grows, not just solve their needs today.
+I believe it's just as important to create maintainable solutions as it to deliver on customer requirements. Customers should be left with solutions that they can take forward as their business evolves and grows, not just solve their needs today.
 
 I'm experienced in creating well structured monolithic applications, micro-service architectures and applying Domain Driven Design techniques to migrate from monoliths to micro-services.
 
