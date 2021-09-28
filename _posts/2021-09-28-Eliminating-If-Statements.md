@@ -28,7 +28,7 @@ If the user does not select a valid choice then the menu will be redisplayed and
 
 This isn't supposed to be a complex solution, it's purely a demo. So try to imagine how in a real application there could be a lot of ifs/switches that make it difficult to follow the code.
 
-```
+```c#
 static void Main()
 {
     // infinite loop to keep the app going until a valid choice is made
