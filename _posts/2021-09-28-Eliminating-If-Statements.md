@@ -9,6 +9,8 @@ This is just a quick post to demonstrate a technique for replacing branching cod
 
 By the end of the article you should feel quite comfortable in using the technique yourself.
 
+_Note that the examples in this article require C# 7 or later._
+
 ## The Problem With If Statements
 If statements are one of the fundamental building blogs of an application. I don't think I've ever worked on an app that didn't have at least one if statement and there's nothing wrong with using them per se. But these statements can get out of hand over time, they might run code blocks they run are complex, or have more nested if statements within them. Eventually this code can become quite hard to follow.
 
