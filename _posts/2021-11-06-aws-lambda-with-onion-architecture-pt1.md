@@ -83,7 +83,7 @@ Time to start coding...
 # A First Attempt
 I started off by creating a new .net core solution with a made up domain, app layer and repository layer. It's nothing complicated, the repository retrieves a hard coded set of products, or a single one by SKU (stock keeping unit).
 
-![](/images/lambda_with_onion_architecture/project_layout_before_Lambdas.png)
+![](/images/lambda_with_onion_architecture/project_layout_before_lambdas.png)
 
 There are quite a few files in this example, but it's all fairly simple and they are all small.
 I won't go into detail describing how I've implemented the Domain or Infrastructure layers as that isn't the point of this blog post. 
@@ -174,10 +174,10 @@ But we are going to do this using AWS Lambda, and in keeping with the best pract
 
 This is quite simple by installing the extension 'AWS-Toolkit for Visual Studio' and then using the new 'C# AWS Lambda Project' project type to add the new projects we need.
 
-![](/images/lambda_with_onion_architecture/create_Lambda_project_dialog.png)
+![](/images/lambda_with_onion_architecture/create_lambda_project_dialog.png)
 
 I used the AWS toolkit to create the two Lambda projects shown below
-![](/images/lambda_with_onion_architecture/project_with_Lambdas_added.png)
+![](/images/lambda_with_onion_architecture/project_with_lambdas_added.png)
 
 (If you are following along with this article you may notice that you don't have any serverless.template files. These are files I added later to deploy the projects using AWS Cloud Formation. Ignore these for now, I'll explain them later.)
 
@@ -289,8 +289,8 @@ return new APIGatewayProxyResponse
 That's it. This Lambda is now fully functioning, and you can test this by running the debugger. The AWS-Toolkit for Visual Studio understands how to debug an AWS Lambda locally by setting the AWS Lambda project as the start-up project and clicking the debug icon, which will launch your browser and show a special debugging page that you can use to invoke your AWS Lambda and step through it. 
 Note: If you are writing a Lambda that will be triggered from API Gateway then you must use the 'API Gateway AWS Proxy' request type.
 
-![](/images/lambda_with_onion_architecture/Lambda_test_tool_icon.png)
-![](/images/lambda_with_onion_architecture/Lambda_debugger.png)
+![](/images/lambda_with_onion_architecture/lambda_test_tool_icon.png)
+![](/images/lambda_with_onion_architecture/lambda_debugger.png)
 
 ---
 # Deploying To The Cloud
