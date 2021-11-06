@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AWS Lambdas with Onion Architecture (.net), by an AWS Noob (pt 1)
+title: C# AWS Lambdas with Onion Architecture (by an AWS Beginner) (pt 1)
 date: 2021-10-15 12:09 +0100
 draft: true
 publish: false
@@ -34,7 +34,7 @@ Usually my solution is arranged like this.
 
 ![Basic Onion Architecture](./../_site/Lambda_with_onion_architecture/onion_architecture_basic.png)
 
-1) The System Boundary contains hosted processes (hosted processes, some examples would be a webapi, a service process or a console app)that take input from somewhere - a user clicking a button, an event being delivered from a message queue, or a HTTP message coming in to a REST/GraphQL endpoint. 
+1) The System Boundary contains hosted processes (hosted processes, some examples would be a web-api, a service process or a console app)that take input from somewhere - a user clicking a button, an event being delivered from a message queue, or a HTTP message coming in to a REST/GraphQL endpoint. 
    
 2) The Application layer is an orchestration layer. This layer is sent commands and queries. When a command/query is received this layer will use the infrastructure layer, and the domain layer to perform whatever actions are needed to process the command, or get data to fulfill the query.
 This layer performs no business logic. 
@@ -58,13 +58,13 @@ So it makes sense that best practice seems to be that a Lambda does one thing.
 
 But I was unsure if this meant that I would be limited in how I have to structure my applications and prevent me from using the architecture that has served me so well in the past.
 
-Most examples I haev seen are far too simplistic, showing little more than 'Hello World' in a single c# file.
+Most examples I have seen are far too simplistic, showing little more than 'Hello World' in a single c# file.
 
-I feel that if these examples are followed in an enterprise application the result will be a domain model for a single domain being spread across many Lambdas. In my opinion this is highly undesirable because it will make it  difficult to have a consolidated view of the business rules, and enforce them without potentially having to copy the same code accross numerous Lambdas.
-It also couples more of the code to the Lambdas themselves, meaning that if in future you decide to switch cloud provider or move away from using FaaS then you will have a lot more work to reimplement.
+I feel that if these examples are followed in an enterprise application the result will be a domain model for a single domain being spread across many Lambdas. In my opinion this is highly undesirable because it will make it  difficult to have a consolidated view of the business rules, and enforce them without potentially having to copy the same code across numerous Lambdas.
+It also couples more of the code to the Lambdas themselves, meaning that if in future you decide to switch cloud provider or move away from using FaaS then you will have a lot more work to re-implement.
 
 I should point at this point that I don't subscribe to the belief that a micro-service *has* to be made up of a single runtime component.. 
-In my opinion a micro-service represents a *bounded-context* and when deployed this is made up of however many runtime components are needed to support that context. Having a hard and fast rule that a micro-service has to be one single runtime component can lead to micro-services that are not truly independant of each other (effectively nano-services) and have to be updated and deployed in lockstep.
+In my opinion a micro-service represents a *bounded-context* and when deployed this is made up of however many runtime components are needed to support that context. Having a hard and fast rule that a micro-service has to be one single runtime component can lead to micro-services that are not truly independent of each other (effectively nano-services) and have to be updated and deployed in lockstep.
 
 # My Target Architecture
 I decided my target architecture for this prototype would be largely the same as what I had done previously, but with AWS Lambdas in the System Boundary layer. If this is possible then adding AWS Lambdas into my future projects would be pretty simple and I would not need to fundamentally change how I design my software. 
@@ -93,10 +93,10 @@ You're free to take a look at the source code if you are interested.
 The application layer has a couple of classes in the queries namespace - `GetProductBySkuQuery` and a `GetProductsQuery`. 
 These are implemented as MediatR requests and can be that send by any class that needs to query data from the application layer.
 
-Each of these query classes has a corresponding handler, these are the classes that MediatR will instantiate and invoke when the corresponding command/qurey is sent.
+Each of these query classes has a corresponding handler, these are the classes that MediatR will instantiate and invoke when the corresponding command/query is sent.
 In this example the query handlers are `GetProductBySkyQueryHandler` and `GetProductsQueryHandler`.
 
-Finally in the application layer we have a Dtos namespace, with a single DTO representing what a product will look like when it is passed out of our application layer.
+Finally in the application layer we have a DTOs namespace, with a single DTO representing what a product will look like when it is passed out of our application layer.
 
 The implementations of the MediatR command & queries are very simple.
 Here is what the `GetProductBySku` query and then handler look like, along with the DTO that is returned.
@@ -161,7 +161,7 @@ public class ProductDto
 ```
 As you can see they're simple. The commands/queries/DTOs are just standard classes. Commands & Queries have to implement IRequest<T>, but other than that they're not special.
 
-The Command/Query handler implements IRequestHandler<T1,T2> and has just a constructor (so we can inject the dependecies) and a single, very short `Handle` method.
+The Command/Query handler implements IRequestHandler<T1,T2> and has just a constructor (so we can inject the dependencies) and a single, very short `Handle` method.
 
 In my experience, most commands/queries implemented in the application layer are roughly this simple even in the most complicated applications.
 
@@ -176,13 +176,13 @@ This is quite simple by installing the extension 'AWS-Toolkit for Visual Studio'
 
 ![](../_site/Lambda_with_onion_architecture/create_Lambda_project_dialog.png)
 
-I used the AWS toolkot to create the two Lambda projects shown below
+I used the AWS toolkit to create the two Lambda projects shown below
 ![](../_site/Lambda_with_onion_architecture/project_with_Lambdas_added.png)
 
 (If you are following along with this article you may notice that you don't have any serverless.template files. These are files I added later to deploy the projects using AWS Cloud Formation. Ignore these for now, I'll explain them later.)
 
 ### Function.cs
-Each of our Lambda projects has a *Function.cs* class, which the toolkit created for us. This is the entry point of the Lambda, lets take a closer look at the Funciton.cs file in the `GetProducts` Lambda.
+Each of our Lambda projects has a *Function.cs* class, which the toolkit created for us. This is the entry point of the Lambda, lets take a closer look at the Function.cs file in the `GetProducts` Lambda.
 
 ```c#
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
@@ -273,7 +273,7 @@ So to do that I have to accept and return the types required by the API gateway.
 The rest of the method is not very complex, and when you strip away the logging lines and the exception handling it will come down to just 3 lines of code.
    1) Creating one of the MediatR commands.
    2) Dispatching the command via MediatR and waiting for the response.
-   3) Serializing the command response into an API Gateway reponse body and returning it along with a status code.
+   3) Serializing the command response into an API Gateway response body and returning it along with a status code.
    
 ```c#
 var query = new GetProductsQuery(this._tenantId);
@@ -329,7 +329,7 @@ In a real enterprise solution if we are using this implementation pattern then a
 Depending on your point of view this might be quite acceptable, but I think I would prefer if some of the Lambda projects contained more than one Lambda (though still deployed separately).
 As the solution grows, maybe these projects could be used to group the Lambda functions up according to the REST resource that they're representing.
 
-In this example the Product Lambdas would be together in a single project, but Lambdas for a different resouce - maybe we decide to introduce some endpoints to get a user - could be located in a different Lambda project. 
+In this example the Product Lambdas would be together in a single project, but Lambdas for a different resource - maybe we decide to introduce some endpoints to get a user - could be located in a different Lambda project. 
 This feels like a neater way of organising the code to me.
 
 In the next post in this series I will address this issue by showing how to consolidate them into a single project.
