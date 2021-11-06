@@ -2,8 +2,8 @@
 layout: post
 title: C# AWS Lambdas with Onion Architecture (by an AWS Beginner) (pt 1)
 date: 2021-10-15 12:09 +0100
-draft: true
-publish: false
+draft: false
+publish: true
 tags: C# AWS Lambda Domain-Driven-Design
 ---
 In this post I'm going to try and document my experience of learning AWS Lambda (with c#) and applying Onion Architecture to my .net solution.
@@ -32,7 +32,7 @@ I don't want this blog post to become too long so I'll probably write a separate
 
 Usually my solution is arranged like this.
 
-![Basic Onion Architecture](./../_site/Lambda_with_onion_architecture/onion_architecture_basic.png)
+![Basic Onion Architecture](/images/Lambda_with_onion_architecture/onion_architecture_basic.png)
 
 1) The System Boundary contains hosted processes (hosted processes, some examples would be a web-api, a service process or a console app)that take input from somewhere - a user clicking a button, an event being delivered from a message queue, or a HTTP message coming in to a REST/GraphQL endpoint. 
    
@@ -74,7 +74,7 @@ Another bonus would also be that introducing AWS Lambdas into my existing projec
 
 So my new target architecture diagram will look pretty similar to the previous version.
 
-![](./../_site/Lambda_with_onion_architecture/target_architecture.png)
+![](/images/Lambda_with_onion_architecture/target_architecture.png)
 
 
 Time to start coding...
@@ -83,7 +83,7 @@ Time to start coding...
 # A First Attempt
 I started off by creating a new .net core solution with a made up domain, app layer and repository layer. It's nothing complicated, the repository retrieves a hard coded set of products, or a single one by SKU (stock keeping unit).
 
-![](../_site/Lambda_with_onion_architecture/project_layout_before_Lambdas.png)
+![](/images/Lambda_with_onion_architecture/project_layout_before_Lambdas.png)
 
 There are quite a few files in this example, but it's all fairly simple and they are all small.
 I won't go into detail describing how I've implemented the Domain or Infrastructure layers as that isn't the point of this blog post. 
@@ -174,10 +174,10 @@ But we are going to do this using AWS Lambda, and in keeping with the best pract
 
 This is quite simple by installing the extension 'AWS-Toolkit for Visual Studio' and then using the new 'C# AWS Lambda Project' project type to add the new projects we need.
 
-![](../_site/Lambda_with_onion_architecture/create_Lambda_project_dialog.png)
+![](/images/Lambda_with_onion_architecture/create_Lambda_project_dialog.png)
 
 I used the AWS toolkit to create the two Lambda projects shown below
-![](../_site/Lambda_with_onion_architecture/project_with_Lambdas_added.png)
+![](/images/Lambda_with_onion_architecture/project_with_Lambdas_added.png)
 
 (If you are following along with this article you may notice that you don't have any serverless.template files. These are files I added later to deploy the projects using AWS Cloud Formation. Ignore these for now, I'll explain them later.)
 
@@ -289,8 +289,8 @@ return new APIGatewayProxyResponse
 That's it. This Lambda is now fully functioning, and you can test this by running the debugger. The AWS-Toolkit for Visual Studio understands how to debug an AWS Lambda locally by setting the AWS Lambda project as the start-up project and clicking the debug icon, which will launch your browser and show a special debugging page that you can use to invoke your AWS Lambda and step through it. 
 Note: If you are writing a Lambda that will be triggered from API Gateway then you must use the 'API Gateway AWS Proxy' request type.
 
-![](../_site/Lambda_with_onion_architecture/Lambda_test_tool_icon.png)
-![](../_site/Lambda_with_onion_architecture/Lambda_debugger.png)
+![](/images/Lambda_with_onion_architecture/Lambda_test_tool_icon.png)
+![](/images/Lambda_with_onion_architecture/Lambda_debugger.png)
 
 ---
 # Deploying To The Cloud
@@ -299,13 +299,13 @@ There are a number of ways to do this, but as a beginner I wasn't really familia
 Fortunately the AWS Toolkit can come to the rescue again by setting up an AWS Cloudformation Template for us, and deploying it.
 
 Simply right click on one of the Lambda projects and select *Add | AWS Serverless Template*
-![](../_site/lambda_with_onion_architecture/add_aws_serverless_template_menu.png)
+![](/images/lambda_with_onion_architecture/add_aws_serverless_template_menu.png)
 
 AWS Toolkit will then add a file named *serverless.template*.
 The contents of the file will look similar to what I've shown below.
 In the screenshot you can see I've highlighted some properties, these are properties I have changed from the default values.
 
-![](../_site/lambda_with_onion_architecture/serverless_template_contents.png)
+![](/images/lambda_with_onion_architecture/serverless_template_contents.png)
 
 The `Handler` is the fully qualified path to the function handler that AWS Lambda will invoke. You should make sure that you include the assembly name (GetProductsFunction), the class namespace (GetProducts), the class name (Function) and the method name (FunctionHandler).
 
