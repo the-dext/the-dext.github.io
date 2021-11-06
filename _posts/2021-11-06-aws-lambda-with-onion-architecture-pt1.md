@@ -10,7 +10,8 @@ In this post I'm going to try and document my experience of learning AWS Lambda 
 
 I'm new to AWS, so if you're a seasoned AWS practitioner you might find some room for improvement in some of the things I've done.
 
-Although I have used Onion Architecture many times on my types of project I have never written any AWS Lambda before and I had never seen any examples where this architecture is used. At first I was unsure if this was just because the examples are all kept simple or or if this architecture style is just incompatible with Lambda, so I decided to try it out.
+Although I have used Onion Architecture many times on my types of project I have never written any AWS Lambda before and I had never seen any examples where this architecture is used. Most examples of Lambda seem to be just 'Hello World', 
+so I decided to try it out myself and create this post.
 
 _Warning - this turned into a long blog post, so you might want to get a coffee now before reading._
 
