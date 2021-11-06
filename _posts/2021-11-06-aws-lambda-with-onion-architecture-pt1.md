@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C# AWS Lambdas with Onion Architecture (by an AWS Beginner) (pt 1)
-date: 2021-10-15 12:09 +0100
+date: 2021-11-06 22:00 +0000
 draft: false
 publish: true
 tags: C# AWS Lambda Domain-Driven-Design
