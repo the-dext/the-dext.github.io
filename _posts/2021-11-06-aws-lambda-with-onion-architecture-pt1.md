@@ -8,10 +8,10 @@ tags: C# AWS Lambda Domain-Driven-Design
 ---
 In this post I'm going to try and document my experience of learning AWS Lambda (with c#) and applying Onion Architecture to my .net solution.
 
-I'm new to AWS, so if you're a seasoned AWS practitioner you might find some room for improvement in some of the things I've done.
-
 Although I have used Onion Architecture many times on my types of project I have never written any AWS Lambda before and I had never seen any examples where this architecture is used. Most examples of Lambda seem to be just 'Hello World', 
 so I decided to try it out myself and create this post.
+
+Because I'm new to AWS, if you're a seasoned AWS practitioner you might find some room for improvement in some of the things I've done.
 
 _Warning - this turned into a long blog post, so you might want to get a coffee now before reading._
 
