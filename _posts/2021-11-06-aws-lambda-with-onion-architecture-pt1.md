@@ -334,8 +334,6 @@ As the solution grows, maybe these projects could be used to group the Lambda fu
 In this example the Product Lambdas would be together in a single project, but Lambdas for a different resource - maybe we decide to introduce some endpoints to get a user - could be located in a different Lambda project. 
 This feels like a neater way of organising the code to me.
 
-In the next post in this series I will address this issue by showing how to consolidate them into a single project.
-
 --- 
 # Thanks For Reading
 If you've made it this far, thanks for reading and I'm sorry what I thought was going to be a reasonably sized post turned into such a monster.
