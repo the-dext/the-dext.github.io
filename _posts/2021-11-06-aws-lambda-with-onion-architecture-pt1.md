@@ -81,13 +81,15 @@ Time to start coding...
 
 ---
 # A First Attempt
-I started off by creating a new .net core solution with a made up domain, app layer and repository layer. It's nothing complicated, the repository retrieves a hard coded set of products, or a single one by SKU (stock keeping unit).
+I started off by creating a new .net core solution with a made up domain, app layer and repository layer. 
 
 ![](/images/lambda_with_onion_architecture/project_layout_before_lambdas.png)
 
 There are quite a few files in this example, but it's all fairly simple and they are all small.
+
 I won't go into detail describing how I've implemented the Domain or Infrastructure layers as that isn't the point of this blog post. 
-You're free to take a look at the source code if you are interested.
+
+For this example the repository retrieves a hard coded set of products, or a single one by SKU (stock keeping unit).
 
 ## Implementing The Application Layer
 The application layer has a couple of classes in the queries namespace - `GetProductBySkuQuery` and a `GetProductsQuery`. 
