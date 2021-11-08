@@ -298,7 +298,7 @@ In Visual Studio select the 'Mock Lambda Test Tool' debugger and then start debu
 # Deploying To The Cloud
 The final stage of my first attempt at using AWS Lambda is to deploy my Lambda projects them to the cloud.
 There are a number of ways to do this, but as a beginner I wasn't really familiar with any of them.
-Fortunately the AWS Toolkit can come to the rescue again by setting up an AWS Cloudformation Template for us, and deploying it.
+Fortunately the AWS Toolkit can come to the rescue again by setting up an AWS CloudFormation Template for us, and deploying it.
 
 Simply right click on one of the Lambda projects and select *Add | AWS Serverless Template*
 ![](/images/lambda_with_onion_architecture/add_aws_serverless_template_menu.png)
@@ -319,6 +319,7 @@ Once you've made your selections, click the *Publish* button and your deployment
 
 If the deployment completes successful you should be able to call your API endpoint from a client or by using something like Postman.
 
+---
 # The End
 At this point everything deploys and works.
 Each of the Lambdas does one thing but backed by a shared architecture that promotes single responsibility in our code and allows us to build up a comprehensive domain model.
