@@ -66,7 +66,7 @@ It also couples more of the code to the Lambdas themselves, meaning that if in f
 I should point at this point that I don't subscribe to the belief that a micro-service *has* to be made up of a single runtime component..
 In my opinion a micro-service represents a *bounded-context* and when deployed this is made up of however many runtime components are needed to support that context. Having a hard and fast rule that a micro-service has to be one single runtime component can lead to micro-services that are not truly independent of each other (effectively nano-services) and have to be updated and deployed in lockstep.
 
-# My Target Architecture
+## My Target Architecture
 I decided my target architecture for this prototype would be largely the same as what I had done previously, but with AWS Lambdas in the System Boundary layer. If this is possible then adding AWS Lambdas into my future projects would be pretty simple and I would not need to fundamentally change how I design my software.
 
 This would mean I can keep my domain layers 100% unit tested too which is something I find invaluable (and easy to achieve because  the domain layer has no dependencies or other layers).
