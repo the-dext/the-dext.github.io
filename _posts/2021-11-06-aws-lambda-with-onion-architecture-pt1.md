@@ -6,7 +6,7 @@ draft: false
 publish: true
 tags: C# AWS Lambda Domain-Driven-Design
 ---
-In this post I'm going to try and document my experience of learning AWS Lambda with c# and applying Onion Architecture to my .net solution.
+In this post I'm going to try and document my experience of learning AWS Lambda with C# and applying Onion Architecture to my .net solution.
 
 Although I have used Onion Architecture many times on my types of project I have never written any AWS Lambda before and I had never seen any examples where this architecture is used. Most examples of Lambda seem to be just 'Hello World', so I decided to try it out myself and create this post to document it.
 Because I'm new to AWS, a seasoned practitioner might find some room for improvement in some of the things I've done.
@@ -33,7 +33,7 @@ Usually my solution is arranged like this.
 
 ![Basic Onion Architecture](/images/lambda_with_onion_architecture/onion_architecture_basic.png)
 
-1) The System Boundary contains hosted processes (hosted processes, some examples would be a web-api, a service process or a console app)that take input from somewhere - a user clicking a button, an event being delivered from a message queue, or a HTTP message coming in to a REST/GraphQL endpoint.
+1) The System Boundary contains hosted processes (hosted processes, some examples would be a web-API, a service process or a console app)that take input from somewhere - a user clicking a button, an event being delivered from a message queue, or a HTTP message coming in to a REST/GraphQL endpoint.
 
 2) The Application layer is an orchestration layer. This layer is sent commands and queries. When a command/query is received this layer will use the infrastructure layer, and the domain layer to perform whatever actions are needed to process the command, or get data to fulfill the query.
 This layer performs no business logic.
@@ -52,12 +52,12 @@ __It is only referenced by the application and infrastructure layer and does dep
     Sending commands & queries to the application layer and returning DTO objects is made easy by using the *Mediatr* and *AutoMapper* nuget packages which were created by Jimmy Bogard.
 
 # What _**I Think**_ an AWS Lambda is
-After reading about AWS Lambda I understood that they offered serverless on-demand processing and ran at a function level (eg a web api endpoint), as opposed to a container hosting a process which provides many functions (eg. a web api with multiple endpoints).
+After reading about AWS Lambda I understood that they offered serverless on-demand processing and ran at a function level (eg a single web API endpoint), as opposed to a container hosting a process which provides many functions (eg. a web API with multiple endpoints).
 So it makes sense that best practice seems to be that a Lambda does one thing.
 
 But I was unsure if this meant that I would be limited in how I have to structure my applications and prevent me from using the architecture that has served me so well in the past.
 
-Most examples I have seen are far too simplistic, showing little more than 'Hello World' in a single c# file.
+Most examples I have seen are far too simplistic, showing little more than 'Hello World' in a single C# file.
 
 I feel that if these examples are followed in an enterprise application the result will be a domain model for a single domain being spread across many Lambdas. In my opinion this is highly undesirable because it will make it  difficult to have a consolidated view of the business rules, and enforce them without potentially having to copy the same code across numerous Lambdas.
 It also couples more of the code to the Lambdas themselves, meaning that if in future you decide to switch cloud provider or move away from using FaaS then you will have a lot more work to re-implement.
