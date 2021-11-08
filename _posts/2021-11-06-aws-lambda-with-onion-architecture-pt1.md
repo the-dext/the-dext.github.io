@@ -290,7 +290,8 @@ return new APIGatewayProxyResponse
 That's it. This Lambda is now fully functioning, and you can test this by running the debugger. The AWS-Toolkit for Visual Studio understands how to debug an AWS Lambda locally by setting the AWS Lambda project as the start-up project and clicking the debug icon, which will launch your browser and show a special debugging page that you can use to invoke your AWS Lambda and step through it.
 Note: If you are writing a Lambda that will be triggered from API Gateway then you must use the 'API Gateway AWS Proxy' request type.
 
-![](/images/lambda_with_onion_architecture/lambda_test_tool_icon.png)
+In Visual Studio select the 'Mock Lambda Test Tool' debugger and then start debugging. A web browser will open and show the AWS Lambda Test Tool.
+
 ![](/images/lambda_with_onion_architecture/lambda_debugger.png)
 
 ---
