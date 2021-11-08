@@ -244,9 +244,9 @@ namespace GetProducts
 ```
 Both the Lambdas are pretty similar so let's just concentrate on this one and break up what is going on...
 
-#### Setting the JSon Serializer
+#### Setting the JSON Serializer
 First of all we have the `[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]` assembly attribute.
-The AWS-Toolkit added this for us and it sets up a JSon Serializer that is compatible with AWS Lambda. I'm sure it's possible to use a different serializer implementation if you needed to, such as Newtonsoft Json, but I'm happy with the default.
+The AWS-Toolkit added this for us and it sets up a JSON Serializer that is compatible with AWS Lambda. I'm sure it's possible to use a different serializer implementation if you needed to, such as Newtonsoft JSON, but I'm happy with the default.
 
 #### The Function Constructor
 Next we have the class definition, and the class constructor.
