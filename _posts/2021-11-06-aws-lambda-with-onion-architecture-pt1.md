@@ -6,9 +6,9 @@ draft: false
 publish: true
 tags: C# AWS Lambda Domain-Driven-Design
 ---
-In this post I'm going to try and document my experience of learning AWS Lambda (with c#) and applying Onion Architecture to my .net solution.
+In this post I'm going to try and document my experience of learning AWS Lambda with c# and applying Onion Architecture to my .net solution.
 
-Although I have used Onion Architecture many times on my types of project I have never written any AWS Lambda before and I had never seen any examples where this architecture is used. Most examples of Lambda seem to be just 'Hello World', so I decided to try it out myself and create this post.
+Although I have used Onion Architecture many times on my types of project I have never written any AWS Lambda before and I had never seen any examples where this architecture is used. Most examples of Lambda seem to be just 'Hello World', so I decided to try it out myself and create this post to document it.
 Because I'm new to AWS, a seasoned practitioner might find some room for improvement in some of the things I've done.
 
 _Warning - this turned into a long blog post, so you might want to get a coffee now before reading._
@@ -33,26 +33,26 @@ Usually my solution is arranged like this.
 
 ![Basic Onion Architecture](/images/lambda_with_onion_architecture/onion_architecture_basic.png)
 
-1) The System Boundary contains hosted processes (hosted processes, some examples would be a web-api, a service process or a console app)that take input from somewhere - a user clicking a button, an event being delivered from a message queue, or a HTTP message coming in to a REST/GraphQL endpoint. 
-   
+1) The System Boundary contains hosted processes (hosted processes, some examples would be a web-api, a service process or a console app)that take input from somewhere - a user clicking a button, an event being delivered from a message queue, or a HTTP message coming in to a REST/GraphQL endpoint.
+
 2) The Application layer is an orchestration layer. This layer is sent commands and queries. When a command/query is received this layer will use the infrastructure layer, and the domain layer to perform whatever actions are needed to process the command, or get data to fulfill the query.
-This layer performs no business logic. 
+This layer performs no business logic.
 
 3) The infrastructure layer deals with talking to external things, like databases, files and third-party APIs.
 The repositories in this layer are responsible for reading the domain model from the database, and saving it back to the database when there are changes.
 
-4) The Domain layer contains the domain models, these are classes which implement the business functionality and enforce invariants (which is another way of saying they enforce business rules). 
+4) The Domain layer contains the domain models, these are classes which implement the business functionality and enforce invariants (which is another way of saying they enforce business rules).
 __It is only referenced by the application and infrastructure layer and does depend on any other layer.__
 
-5) The DTO Boundary is not an actual layer. My art skills aren't very good but what I'm trying to show here is that communication between the Service Boundary and the Application Layer is __only__ done through some form of DTO I tend to use 
-   - *Commands* to ask the Application Layer to perform an action that has a side effect (causes a change). 
+5) The DTO Boundary is not an actual layer. My art skills aren't very good but what I'm trying to show here is that communication between the Service Boundary and the Application Layer is __only__ done through some form of DTO I tend to use
+   - *Commands* to ask the Application Layer to perform an action that has a side effect (causes a change).
    - *Queries* to ask the Application layer for data
    - DTOs to return data from queries.
-    
-    Sending commands & queries to the application layer and returning DTO objects is made easy by using the *Mediatr* and *AutoMapper* nuget packages which were created by Jimmy Bogard. 
-  
+
+    Sending commands & queries to the application layer and returning DTO objects is made easy by using the *Mediatr* and *AutoMapper* nuget packages which were created by Jimmy Bogard.
+
 # What _**I Think**_ an AWS Lambda is
-After reading about AWS Lambda I understood that they offered serverless on-demand processing and ran at a function level (eg a web api endpoint), as opposed to a container hosting a process which provides many functions (eg. a web api with multiple endpoints). 
+After reading about AWS Lambda I understood that they offered serverless on-demand processing and ran at a function level (eg a web api endpoint), as opposed to a container hosting a process which provides many functions (eg. a web api with multiple endpoints).
 So it makes sense that best practice seems to be that a Lambda does one thing.
 
 But I was unsure if this meant that I would be limited in how I have to structure my applications and prevent me from using the architecture that has served me so well in the past.
@@ -62,11 +62,11 @@ Most examples I have seen are far too simplistic, showing little more than 'Hell
 I feel that if these examples are followed in an enterprise application the result will be a domain model for a single domain being spread across many Lambdas. In my opinion this is highly undesirable because it will make it  difficult to have a consolidated view of the business rules, and enforce them without potentially having to copy the same code across numerous Lambdas.
 It also couples more of the code to the Lambdas themselves, meaning that if in future you decide to switch cloud provider or move away from using FaaS then you will have a lot more work to re-implement.
 
-I should point at this point that I don't subscribe to the belief that a micro-service *has* to be made up of a single runtime component.. 
+I should point at this point that I don't subscribe to the belief that a micro-service *has* to be made up of a single runtime component..
 In my opinion a micro-service represents a *bounded-context* and when deployed this is made up of however many runtime components are needed to support that context. Having a hard and fast rule that a micro-service has to be one single runtime component can lead to micro-services that are not truly independent of each other (effectively nano-services) and have to be updated and deployed in lockstep.
 
 # My Target Architecture
-I decided my target architecture for this prototype would be largely the same as what I had done previously, but with AWS Lambdas in the System Boundary layer. If this is possible then adding AWS Lambdas into my future projects would be pretty simple and I would not need to fundamentally change how I design my software. 
+I decided my target architecture for this prototype would be largely the same as what I had done previously, but with AWS Lambdas in the System Boundary layer. If this is possible then adding AWS Lambdas into my future projects would be pretty simple and I would not need to fundamentally change how I design my software.
 
 This would mean I can keep my domain layers 100% unit tested too which is something I find invaluable (and easy to achieve because  the domain layer has no dependencies or other layers).
 Another bonus would also be that introducing AWS Lambdas into my existing projects would be also very easy - all I would need to do would be to write some Lambdas to trigger the application layer using the existing *commands*, *queries* and *DTOs*.
@@ -80,18 +80,18 @@ Time to start coding...
 
 ---
 # A First Attempt
-I started off by creating a new .net core solution with a made up domain, app layer and repository layer. 
+I started off by creating a new .net core solution with a made up domain, app layer and repository layer.
 
 ![](/images/lambda_with_onion_architecture/project_layout_before_lambdas.png)
 
 There are quite a few files in this example, but it's all fairly simple and they are all small.
 
-I won't go into detail describing how I've implemented the Domain or Infrastructure layers as that isn't the point of this blog post. 
+I won't go into detail describing how I've implemented the Domain or Infrastructure layers as that isn't the point of this blog post.
 
 For this example the repository retrieves a hard coded set of products, or a single one by SKU (stock keeping unit).
 
 ## Implementing The Application Layer
-The application layer has a couple of classes in the queries namespace - `GetProductBySkuQuery` and a `GetProductsQuery`. 
+The application layer has a couple of classes in the queries namespace - `GetProductBySkuQuery` and a `GetProductsQuery`.
 These are implemented as MediatR requests and can be that send by any class that needs to query data from the application layer.
 
 Each of these query classes has a corresponding handler, these are the classes that MediatR will instantiate and invoke when the corresponding command/query is sent.
@@ -169,7 +169,7 @@ In my experience, most commands/queries implemented in the application layer are
 ---
 
 ## Adding Some AWS Lambda Projects
-At this point we essentially have a solution that works, which could be prove by calling the Application layer using a console app or unit testing framework. 
+At this point we essentially have a solution that works, which could be prove by calling the Application layer using a console app or unit testing framework.
 
 But we are going to do this using AWS Lambda, and in keeping with the best practices we need a separate Lambda for each of the web API endpoints that we want to provide to the users of our application.
 
@@ -260,22 +260,22 @@ This allows the creation of Mediatr to be done within the constructor, but defer
 
 #### The Function Handler
 The next part of the file is the Function Handler method that will be invoked once our AWS Lambda has been created.
-The signature for this method is 
+The signature for this method is
 
 `public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context)`
 
 Note that the request argument and the method return type are special in that we are using `APIGatewayProxyRequest` and `APIGatewayProxyResponse` respectively.
 
-The argument and return types you will use in your AWS Lambda function handlers are specific to how your AWS Lambda is being triggered. 
+The argument and return types you will use in your AWS Lambda function handlers are specific to how your AWS Lambda is being triggered.
 
-In my example I am creating API endpoints that will be  accessible via a public API gateway so that I can call them from my PC (using Postman or a similar tool) when they have been deployed to the cloud. 
+In my example I am creating API endpoints that will be  accessible via a public API gateway so that I can call them from my PC (using Postman or a similar tool) when they have been deployed to the cloud.
 So to do that I have to accept and return the types required by the API gateway. If my Lambda was being triggered some other way then these types would be different.
 
 The rest of the method is not very complex, and when you strip away the logging lines and the exception handling it will come down to just 3 lines of code.
    1) Creating one of the MediatR commands.
    2) Dispatching the command via MediatR and waiting for the response.
    3) Serializing the command response into an API Gateway response body and returning it along with a status code.
-   
+
 ```c#
 var query = new GetProductsQuery(this._tenantId);
 var queryResponse = await this._mediatr.Value.Send(query);
@@ -285,9 +285,9 @@ return new APIGatewayProxyResponse
     StatusCode = (int)HttpStatusCode.OK,
     Body = JsonConvert.SerializeObject(queryResponse)
 };
-``` 
+```
 #### Debugging Locally
-That's it. This Lambda is now fully functioning, and you can test this by running the debugger. The AWS-Toolkit for Visual Studio understands how to debug an AWS Lambda locally by setting the AWS Lambda project as the start-up project and clicking the debug icon, which will launch your browser and show a special debugging page that you can use to invoke your AWS Lambda and step through it. 
+That's it. This Lambda is now fully functioning, and you can test this by running the debugger. The AWS-Toolkit for Visual Studio understands how to debug an AWS Lambda locally by setting the AWS Lambda project as the start-up project and clicking the debug icon, which will launch your browser and show a special debugging page that you can use to invoke your AWS Lambda and step through it.
 Note: If you are writing a Lambda that will be triggered from API Gateway then you must use the 'API Gateway AWS Proxy' request type.
 
 ![](/images/lambda_with_onion_architecture/lambda_test_tool_icon.png)
@@ -296,7 +296,7 @@ Note: If you are writing a Lambda that will be triggered from API Gateway then y
 ---
 # Deploying To The Cloud
 The final stage of my first attempt at using AWS Lambda is to deploy my Lambda projects them to the cloud.
-There are a number of ways to do this, but as a beginner I wasn't really familiar with any of them. 
+There are a number of ways to do this, but as a beginner I wasn't really familiar with any of them.
 Fortunately the AWS Toolkit can come to the rescue again by setting up an AWS Cloudformation Template for us, and deploying it.
 
 Simply right click on one of the Lambda projects and select *Add | AWS Serverless Template*
@@ -313,7 +313,7 @@ The `Handler` is the fully qualified path to the function handler that AWS Lambd
 The `Path` and `Method` refer to the endpoint path you want to use to invoke your Lambda, and the HTTP method that you want your Lambda to use. I have set mine to be /Products and to only be used when a HTTP Get request is received.
 
 With your serverless.template file in place you can now right-click on the Lambda project and choose *Publish to AWS Lambda..*.
-You'll then be shown a dialog where you can select the AWS profile, region, stack name and S3 bucket to use for the deployment. 
+You'll then be shown a dialog where you can select the AWS profile, region, stack name and S3 bucket to use for the deployment.
 Once you've made your selections, click the *Publish* button and your deployment will begin.
 
 If the deployment completes successful you should be able to call your API endpoint from a client or by using something like Postman.
@@ -330,10 +330,10 @@ In a real enterprise solution if we are using this implementation pattern then a
 Depending on your point of view this might be quite acceptable, but I think I would prefer if some of the Lambda projects contained more than one Lambda (though still deployed separately).
 As the solution grows, maybe these projects could be used to group the Lambda functions up according to the REST resource that they're representing.
 
-In this example the Product Lambdas would be together in a single project, but Lambdas for a different resource - maybe we decide to introduce some endpoints to get a user - could be located in a different Lambda project. 
+In this example the Product Lambdas would be together in a single project, but Lambdas for a different resource - maybe we decide to introduce some endpoints to get a user - could be located in a different Lambda project.
 This feels like a neater way of organising the code to me.
 
---- 
+---
 # Thanks For Reading
 If you've made it this far, thanks for reading and I'm sorry what I thought was going to be a reasonably sized post turned into such a monster.
 
