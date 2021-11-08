@@ -51,6 +51,7 @@ __It is only referenced by the application and infrastructure layer and does dep
 
     Sending commands & queries to the application layer and returning DTO objects is made easy by using the *Mediatr* and *AutoMapper* nuget packages which were created by Jimmy Bogard.
 
+---
 # What _**I Think**_ an AWS Lambda is
 After reading about AWS Lambda I understood that they offered serverless on-demand processing and ran at a function level (eg a single web API endpoint), as opposed to a container hosting a process which provides many functions (eg. a web API with multiple endpoints).
 So it makes sense that best practice seems to be that a Lambda does one thing.
