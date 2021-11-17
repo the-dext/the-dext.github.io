@@ -55,7 +55,9 @@ You can see an example of this in *FunctionBase.cs* which is now the only place 
     }
 ```
 
-The other Lambda function handlers just need to inherit from this base class which is as simple as changing the class definitions, for example `public class GetProductsFunction : FunctionBase`
+The other Lambda function handlers just need to inherit from this base class which is as simple as changing the class definitions, for example 
+
+`public class GetProductsFunction : FunctionBase`
 
 ## Deployments
 This structure is easier to work with now that all our Lambda function handlers are co-located. But we still want our Lambdas to deploy in the same way as the previous version did, so how can we do that?
