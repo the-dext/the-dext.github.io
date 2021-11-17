@@ -21,7 +21,7 @@ You can find the code used in this blog post on my [GitHub repository](https://g
 Let’s start by adding a new C# project to contain the AWS Lambda functions that were previously in their own dedicated projects. 
 For the sake of trying this out I named mine *MultipleLambdas.csproj*
 
-All I then had to do was copy the function handlers from the original projects into the new one, and rename them so that they do not conflict (remembering to fixup the namespace too).
+All I then had to do was copy the function handlers from the original projects into the new one, and rename them so that they do not conflict (remembering to fix-up the namespace too).
 
 ![](/images/lambda_with_onion_architecture_pt2/solution_structure.png)
 
@@ -29,7 +29,33 @@ All I then had to do was copy the function handlers from the original projects i
 ## Sharing Common Code
 
 A benefit of this new project structure is that it’s easier to share code that is common between function handlers. For example we can define a base class for our functions to hold our IoC container setup.
-You can see an example of this in *FunctionBase.cs* which is now the only place that the configures the IoC container.
+You can see an example of this in *FunctionBase.cs* which is now the only place that the configures the IoC container. 
+
+```c#
+    public class FunctionBase
+    {
+        private readonly IServiceCollection _serviceCollection;
+        private readonly ServiceProvider _serviceProvider;
+        private readonly Lazy<IMediator> _mediatr;
+        private readonly Lazy<ILogger> _logger;
+
+        public FunctionBase()
+        {
+            this._serviceCollection = new ServiceCollection()
+                .AddApplicationServices()
+                .AddLoggingService();
+            this._serviceProvider = this._serviceCollection.BuildServiceProvider();
+
+            this._mediatr = new Lazy<IMediator>(() => this._serviceProvider.GetRequiredService<IMediator>());
+            this._logger = new Lazy<ILogger>(() => this._serviceProvider.GetRequiredService<ILogger>());
+        }
+
+        protected ILogger Logger => this._logger.Value;
+        protected IMediator Mediator => this._mediatr.Value;
+    }
+```
+
+The other Lambda function handlers just need to inherit from this base class which is as simple as changing the class definitions, for example `public class GetProductsFunction : FunctionBase`
 
 ## Deployments
 This structure is easier to work with now that all our Lambda function handlers are co-located. But we still want our Lambdas to deploy in the same way as the previous version did, so how can we do that?
