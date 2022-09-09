@@ -4,12 +4,16 @@ title: "TDD: Mocking vs No Mocking <br/>- Here's Why You Should Do Both"
 draft: false
 publish: true
 tags: C# dotNet TDD Test-Driven-Development Domain-Driven-Design
+excerpt_separator: <!--more-->
+
 ---
 If you're writing unit tests you'll probably have heard the debate about whether or not you should use mock objects. 
 
 Or maybe you're struggling with difficult to write or maintain tests because they're complex?
 
 In this article I'm going to attempt to show that you need both techniques in your solutions and show how understanding when to use each style of test will help you on your TDD and DDD journey.
+
+<!--more-->
 
 Bear in mind when reading this article that I am a huge advocate of Domain Driven Design and structure applications following the Onion Architecture. There is going to be some DDD terminology (but not too much).
 

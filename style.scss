@@ -17,22 +17,29 @@ html {
   font-size: 100%;
 }
 
+// body {
+// 	background: $white;
+//   font: 18px/1.4 $helvetica;
+//   color: $darkGray;
+// }
+
 body {
-	background: $white;
+	background: #202124;
   font: 18px/1.4 $helvetica;
-  color: $darkGray;
+  color: silver;
 }
+
 
 .container {
   margin: 0 auto;
-  max-width: 740px;
+  max-width: 1024px;
   padding: 0 10px;
   width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
-  color: $darkerGray;
+  color: silver;
   font-weight: bold;
 
   line-height: 1.7;
@@ -60,8 +67,7 @@ h3 {
 }
 
 h4 {
-  font-size: 18px;
-  color: $gray;
+  font-size: 18px; 
 }
 
 p {
@@ -287,10 +293,9 @@ footer {
 .post-tags {
   display: inline-block; 
   margin-right: 3px;   
-  background-color: rgb(255, 255, 161); 
-  color:rgb(87, 84, 84); 
+  color: rgb(252, 252, 158);
   font-size: medium;
-  border: 3px solid rgb(255, 255, 161);
+  border: 3px solid rgb(252, 252, 158);
   text-align: center;
   padding:.2em;
   border-radius: 25px;
@@ -301,10 +306,9 @@ footer {
   float: left; 
   margin-left: 1.5px;   
   margin-right: 3px;   
-  background-color: rgb(255, 255, 161); 
-  color:rgb(87, 84, 84); 
+  color: rgb(252, 252, 158); 
   font-size: small;
-  border: 3px solid rgb(255, 255, 161);
+  border: 3px solid rgb(252, 252, 158);
   text-align: center;
   padding:.3em;
   border-radius: 25px;
@@ -329,6 +333,21 @@ footer {
   color: #f44;
   padding:.5em;
   text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 70%;
+  border-color: #2459BA;
+  border-width: thin;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

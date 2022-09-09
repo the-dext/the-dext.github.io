@@ -5,11 +5,15 @@ date: 2021-11-06 22:00 +0000
 draft: false
 publish: true
 tags: C# AWS Lambda Domain-Driven-Design
+excerpt_separator: <!--more-->
+
 ---
 In this post I'm going to try and document my experience of learning AWS Lambda with C# and applying Onion Architecture to my .net solution.
 
 Although I have used Onion Architecture many times on my types of project I have never written any AWS Lambda before and I had never seen any examples where this architecture is used. Most examples of Lambda seem to be just 'Hello World', so I decided to try it out myself and create this post to document it.
 Because I'm new to AWS, a seasoned practitioner might find some room for improvement in some of the things I've done.
+
+<!--more-->
 
 _Warning - this turned into a long blog post, so you might want to get a coffee now before reading._
 
@@ -49,7 +53,7 @@ __It is only referenced by the application and infrastructure layer and does dep
    - *Queries* to ask the Application layer for data
    - DTOs to return data from queries.
 
-    Sending commands & queries to the application layer and returning DTO objects is made easy by using the *Mediatr* and *AutoMapper* nuget packages which were created by Jimmy Bogard.
+Sending commands & queries to the application layer and returning DTO objects is made easy by using the *Mediatr* and *AutoMapper* nuget packages which were created by Jimmy Bogard.
 
 ---
 # What _**I Think**_ an AWS Lambda is

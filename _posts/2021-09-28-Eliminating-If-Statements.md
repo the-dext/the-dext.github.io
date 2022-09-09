@@ -4,10 +4,14 @@ title: "Eliminating If Statements"
 draft: false
 publish: true
 tags: C# dotNet Functional Refactoring
+excerpt_separator: <!--more-->
+
 ---
 This is just a quick post to demonstrate a technique for replacing branching code (if-else and switch statements), and replacing it with a look-up. Sometimes by eliminating branching logic this can make your application easier to comprehend (which means more maintainable). 
 
 By the end of the article you should feel quite comfortable in using the technique yourself.
+
+<!--more-->
 
 _Note that the examples in this article require C# 7 or later._
 

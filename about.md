@@ -21,6 +21,6 @@ If there is something you would like to see covered in an article then please dr
 ### Contact me
 If you'd like to get in touch feel free to contact me using the email address below, or via LinkedIn 
 
-[email@domain.com](mailto:email@domain.com)
+[chris.dexter.blog@outlook.com](chris.dexter.blog@outlook.com)
 
 [LinkedIn](https://www.linkedin.com/in/chris-dexter/)

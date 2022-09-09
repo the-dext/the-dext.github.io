@@ -5,10 +5,14 @@ date: 2021-11-17 19:00 +0000
 draft: false
 publish: true
 tags: C# AWS Lambda Domain-Driven-Design
+excerpt_separator: <!--more-->
+
 ---
 In my previous post I described how I put together some C# AWS Lambda functions with a shared Onion architecture behind them. This was my first attempt at using AWS Lambda and I feel like my solution worked well for me but with the potential downside that each new AWS Lambda function required a new  C# project. 
 
 In this follow on post I am going to address this issue by using a single project which contains multiple Lambda functions. 
+
+<!--more-->
 
 You can find the code used in this blog post on my [GitHub repository](https://github.com/the-dext/blog_dotNet_aws_lambda_with_onion_architecture_pt2).
 
