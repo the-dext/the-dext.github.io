@@ -1,6 +1,7 @@
 ---
 layout: post
-title: C# AWS Lambdas with Onion Architecture (By an AWS Beginner) pt1
+title: C# AWS Lambdas with Onion Architecture 
+subtitle: <span class='subtitle'>(By an AWS Beginner) pt1</span>
 date: 2021-11-06 22:00 +0000
 draft: false
 publish: true

@@ -39,7 +39,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
-  color: silver;
+  color: $headline;
   font-weight: bold;
 
   line-height: 1.7;
@@ -292,7 +292,9 @@ footer {
 
 .post-tags {
   display: inline-block; 
-  margin-right: 3px;   
+  margin-right: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;  
   color: rgb(252, 252, 158);
   font-size: medium;
   border: 3px solid rgb(252, 252, 158);
@@ -345,9 +347,40 @@ hr {
   display: block;
   margin-top: 30px;
   margin-bottom: 30px;
-  width: 70%;
-  border-color: #2459BA;
+  width: 100%;
+  border-color: $headline;
   border-width: thin;
+}
+
+h1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+sub {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-top: 0;
+  color: $headline;
+}
+
+.closingOut, .closingOut h4 {
+  color: black;
+}
+
+.articleBreak {
+  width:50%;
+  color:gray;
+  border-style: dashed;
+  border-width: thin; 
+  text-decoration: dashed;
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.entry > p img {
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

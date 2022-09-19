@@ -1,21 +1,18 @@
 ---
 layout: post
-title: AutoFixture Basics Part 1 - An Example Problem
-draft: true
+title: AutoFixture Basics Part 1
+subtitle: <span class='subtitle'>An Example Problem</span>
+draft: false
 publish: true
 tags: C# dotNet TDD Test-Driven-Development
 date: 2022-09-04 20:41 +0000
 excerpt_separator: <!--more-->
-
 ---
+Have your unit tests become a ball & chain?
 
-# Do Your Unit Tests Feel Like a Ball & Chain?
+Are small changes in your application breaking all of your unit tests?
 
-Have your simple unit tests evolved into monsters?
-
-Are small changes in your application causing a disproportionate amount of code change in your test projects?
-
-Do you now regret writing your unit tests ? 
+Thinking about scrapping unit tests completely ? 
 
 In this blog series I'll show some problems in the way unit tests are often written, and how you can take advantage of AutoFixture to help you get back to having unit tests that are a benefit instead of a burden.
 My goal is that by the end of the series you will a good understanding of AutoFixture and its benefits, and that you will feel confident enough to use it in your own projects.
@@ -25,8 +22,8 @@ My goal is that by the end of the series you will a good understanding of AutoFi
 AutoFixture is a library created by Mark Seemann to help developers write code in a TDD style, but it's just as relevant if you write your tests after the fact rather then TDD. 
 The primary focus of AutoFixture is to create anonymous data, but over the course of this series you will see that AutoFixture offers much more than this.
 
----
-## An example to Start From
+<hr class='articleBreak'>
+## An Example to Start From
 Before we can start to use AutoFixture, we first need some example code to work with. 
 So lets imagine that we have a small system that deals with Blogging. In this system there is a blog that authors can contribute to by publishing blog posts that they are associated to (one author per blog post).
 
@@ -40,15 +37,13 @@ This structure is represented in the following class diagram.
 
 ![Class Diagram](/images/autoFixture_basics/class_diagram.png)
 
->
->Our example system won't do much, but what it will do is enforce some rules around the construction of objects to make sure that the users of our domain model (other devs and our future selves) you cannot create instances of classes in an invalid state.
->
->This is very important, I won't go into this in much detail now, but in my opinion designing your classes so that they cannot be instantiated in an invalid state is one of the corner-stones of good object oriented programming.
->
->If you aren't enforcing valid state in your code then my advice is that you start doing so as soon as possible, the benefits you will reap can't be over-stated. 
->
+Our example system won't do much, but what it will do is enforce some rules around the construction of objects to make sure that the users of our domain model (other devs and our future selves) you cannot create instances of classes in an invalid state.
 
----
+This is very important, I won't go into this in much detail now, but in my opinion designing your classes so that they cannot be instantiated in an invalid state is one of the corner-stones of good object oriented programming.
+
+If you aren't enforcing valid state in your code then my advice is that you start doing so as soon as possible, the benefits you will reap can't be over-stated. 
+
+<hr class='articleBreak'>
 ## Writing Tests (TDD Style) Without AutoFixture
 
 Before I can show you how to apply AutoFixture first I'll need to create some unit tests without it.
@@ -109,7 +104,7 @@ At this point I can run the tests and they are all passing.
 
 ![](/images/autoFixture_basics/good_tests.jpg)
 
----
+<hr class='articleBreak'>
 
 ### Adding More Functionality
 All looking good so far!
@@ -144,41 +139,43 @@ public void Constructor_Initializes_BlogPost()
 }
 ```
 
----
+<hr class='articleBreak'>
 ## But There Are Problems...
 
 On the face of it our tests are helping us verify we haven't introduced faults into our system as we develop it, and so far the tests are fairly simple to understand.
 But we have enough here already to highlight some issues (in fact we had enough when we wrote our second unit test)
 
-1) When we introduced our second unit test which added constructor arguments to our `BlogPost` class we broke our first `Can_Construct_BlogPost` test. It didn't just fail, it wouldn't even compile.
+* When we introduced our second unit test which added constructor arguments to our `BlogPost` class we broke our first `Can_Construct_BlogPost` test. It didn't just fail, it wouldn't even compile.
 
-2) When we introduced constructor arguments into our `BlogAuthor` class we broke both of our `BlogPost` tests because they had to supply an author name. Again they wouldn't even compile.
+* When we introduced constructor arguments into our `BlogAuthor` class we broke both of our `BlogPost` tests because they had to supply an author name. They also won't even compile.
 
+To sum it up...
 
 ![](/images/autoFixture_basics/broken_tests_meme.jpg)
 
-What we have here is a form of Brittle Unit Tests - our implementation changes are forcing us to go back to unit tests and rewrite parts of them in someway.
+What we have here is a form of brittle unit tests - our implementation changes are forcing us to go back to unit tests and rewrite parts of them in someway (as opposed to the tests failing because the outcome has changed).
 As the number of tests grows, so does the amount of work we need to do to maintain the test projects when we work on our application implementation.
 
 We can also make some observations about the two BlogPost tests we wrote
 
-1) **The BlogPost Can_Construct Does Not Care About The Test Data Used**  
+* **The BlogPost Can_Construct Does Not Care About The Test Data Used**  
 \
 The BlogPost Can_Construct test does not even assert what the properties of the constructed blog post are, it only uses the test data to constructs an instance and prove it was constructed. Nothing more.
 \
 
-2) **The Constructor_Initializes_BlogPost also does not care what the values of the constructor augments are.**  
+* **The Constructor_Initializes_BlogPost also does not care what the values of the constructor augments are.**  
 \
 Hang on a minute, this is a little bit more interesting. We can see that the test asserts that the test data passed into the constructor becomes the values of the properties. So how can the test not be interested in the values ?  
 Well I can say that because the test is to make sure that the properties are set to the values injected into the constructor. **What** the values are is irrelevant; what counts is that **valid arguments become property values**.
 
->At this point I want to mention that when implementing the code I noticed a mistake in our example project. The `BlogPost` class was missing a key piece of data - an actual body post body!
+### Oops
+At this point I want to mention that when implementing the code I noticed a mistake in our example project. The `BlogPost` class was missing a key piece of data - an actual body post body!
 So I went back and added it, breaking all those existing unit tests again and further demonstrating the problem I'm describing here.
 
 ### One Last Demonstration Of The Problem 
 Anyone who has written or maintained unit tests in a real world system will know that they can be a lot larger and more complex that what we have in this application, particularly if they are poorly written.
 
-But if you're not quite convinced yet I want to give it one more try.Let me fast forward time and show you what a unit test will look like for our command handler based on the domain model as it stands now. 
+But if you're not quite convinced yet I want to give it one more try. Let me fast forward time and show you what a unit test will look like for our command handler based on the domain model as it stands now. 
 
 The command handler will take a blog post, publish it to a blog and save the blog back to our database via a repository, that's not complex functionality.
 
@@ -207,7 +204,7 @@ If you have some experience writing unit tests you are probably thinking that we
 
 But when create domain layers I try to limit defining them for aggregate root classes, I don't define them for any other entities or values if I can avoid it.
 
-After years of using mocking I now firmly believe that one should be careful in choosing what to mock, especially if you are verifying that certain mocked methods are called.
+After years of writing software by applying test driven design, I believe that one should be careful in choosing what to mock and even more careful in considering when to verifying that mocked methods are called.
 Mocking out interfaces can easily lead to tests that focus on how classes are implemented instead of the outcomes of the class.
 This prevents us from refactoring code without breaking tests even more than the example I tried to show above.
 
@@ -216,9 +213,5 @@ Later in this series I will however show you how AutoFixture can automatically m
 
 ---
 
-# Part 2 - Introducing AutoFixture Anonymous Data
-As I mentioned at the start of this article one of the main features of AutoFixture is to create anonymous data.
-The idea here is that you can create random data and you don't concern yourselves with the actual values. It's anonymous in the same way that c# allows you to construct an anonymous class on the fly without concerning yourself over a class definition.
-
-Lets go back to our unit tests and refactor them
-
+# Part 2 - Adding AutoFixture
+In part two of this article I will show how to introduce autofixture to your unit tests to solve some of the issues demonstrated in this article.
