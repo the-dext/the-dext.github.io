@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "TDD: Mocking vs No Mocking <br/>- Here's Why You Should Do Both"
+title: "TDD: Mocking vs No Mocking"
+subtitle: <span class='subtitle'>Here's Why You Should Do Both</span>
 draft: false
 publish: true
 tags: C# dotNet TDD Test-Driven-Development Domain-Driven-Design
