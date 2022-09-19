@@ -1,8 +1,8 @@
 ---
 layout: post
-title: AutoFixture Basics Part 1
-subtitle: <span class='subtitle'>An Example Problem</span>
-date: 2022-09-19 16:00 +0000
+title: AutoFixture Basics
+subtitle: <span class='subtitle'>Part 1, An Example Problem</span>
+date: 2022-09-19 00:00 +0000
 draft: false
 publish: true
 tags: C# dotNet TDD Test-Driven-Development
