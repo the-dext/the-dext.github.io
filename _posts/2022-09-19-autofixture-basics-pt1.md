@@ -2,11 +2,12 @@
 layout: post
 title: AutoFixture Basics Part 1
 subtitle: <span class='subtitle'>An Example Problem</span>
+date: 2022-09-19 16:00 +0000
 draft: false
 publish: true
 tags: C# dotNet TDD Test-Driven-Development
-date: 2022-09-19 20:41 +0000
 excerpt_separator: <!--more-->
+
 ---
 Have your unit tests become a ball & chain?
 
