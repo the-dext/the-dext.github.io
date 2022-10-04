@@ -92,10 +92,47 @@ public void Constructor_Initializes_BlogPost()
 
 If we apply AutoFixture and use the technique shown in the previous test, we can replace the first for lines of expectation setup end up with this..
 ```c#
+    var fixture = new Fixture();
+
+    string expectedBlogPostTitle = fixture.Create<string>();
+    string expectedBlogBody = fixture.Create<string>();
+    var expectedBlogPostDateTime = fixture.Create<DateTime>();
+    var expectedBlogAuthor = new BlogAuthor(fixture.Create<string>());
+```
+After making these changes the test doesn't look much different but we have removed all explicit variable values.
+
+But we have introduced a problem, sometimes.
+I ran this test five times, and twice it failed with this message
+
+`System.ArgumentException : postDateTime date cannot be in the past`
+
+AutoFixture uses various strategies for generating data (which I believe are called Specimen Builders, but I could be mistaken). In the case of creating strings AutoFixture will simply generate a new Guid value.
+But it can't do this for dates and numeric types. 
+
+In the case of dates AutoFixture will generate a value between now -2 years, and now + 2 years.
+
+If we provide a date in the past our domain object will throw an exception, so we need to tell AutoFixture that when we ask for this date there is a restriction.
+
+### Discovering unexpected values is a good thing
+This problem demonstrates one of the *benefits* of using AutoFixture to create anonymous data. In a real project written using TDD, we could have easily  focused on the happy path through our implementation and completely missed validating that the date cannot be in the past.
+By having AutoFixture generating this data for us it improves our chances of finding edge case problems.
+
+But now that AutoFixture is triggering this exception we need to amend the test and tell AutoFixture that we want to override the default creation of a date.
+One way to do this is by registering a creation function.
+
+### Register<T>
+The `Register<T>` method will allow us to tell AutoFixture what to supply as a value, whenever it needs to create an instance of `T`. If we apply this to our DateTime problem we can make sure that we always get back a DateTime that is valid for our test case.
+
+`fixture.Register<DateTime>(() => DateTime.Now);`
+
+### End Result
+The end result of updating the test is shown below.
+```c#
 [Fact]
 public void Constructor_Initializes_BlogPost()
 {
     var fixture = new Fixture();
+    fixture.Register<DateTime>(() => DateTime.Now);
 
     string expectedBlogPostTitle = fixture.Create<string>();
     string expectedBlogBody = fixture.Create<string>();
@@ -109,31 +146,6 @@ public void Constructor_Initializes_BlogPost()
     sut.PostDateTime.Should().Be(expectedBlogPostDateTime);
 }
 ```
-Much like in the previous example, the test doesn't look much different but we have removed all explicit variable values.
-
-But there is a problem, sometimes.
-I ran this test five times, and twice it failed with this message
-
-`System.ArgumentException : postDateTime date cannot be in the past`
-
-AutoFixture uses various strategies for generating data (which I believe are called Specimen Builders, but I could be mistaken). In the case of creating strings AutoFixture will simply generate a new Guid value.
-But it can't do this for dates and numeric types. 
-
-In the case of dates AutoFixture will generate a value between now -2 years, and now + 2 years.
-
-If we provide a date in the past our domain object will throw an exception, so we need to tell AutoFixture that when we ask for this date there is a restriction.
-
-This problem demonstrates one of the *benefits* of using AutoFixture to create anonymous data. In a real project written using TDD, we could have easily  focused on the happy path through our implementation and completely missed validating that the date cannot be in the past.
-By having AutoFixture generating this data for us it improves our chances of finding edge case problems.
-
-But now that AutoFixture is triggering this exception we need to amend the test and tell AutoFixture that we want to override the default creation of a date.
-One way to do this is by registering a creation function.
-
-### Register<T>
-The `Register<T>` method will allow us to tell AutoFixture what to supply as a value, whenever it needs to create an instance of `T`. If we apply this to our DateTime problem we can make sure that we always get back a DateTime that is valid for our test case.
-
-`fixture.Register<DateTime>(() => DateTime.Now);`
-
 ## Part 3 - Simplifying Tests
 
 In this post we applied very basic application of AutoFixture to create anonymous instances of .net built-in types such as strings and dates.
