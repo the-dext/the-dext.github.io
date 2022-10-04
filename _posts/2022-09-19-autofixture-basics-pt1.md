@@ -144,7 +144,7 @@ public void Constructor_Initializes_BlogPost()
 ## But There Are Problems...
 
 On the face of it our tests are helping us verify we haven't introduced faults into our system as we develop it, and so far the tests are fairly simple to understand.
-But we have enough here already to highlight some issues (in fact we had enough when we wrote our second unit test)
+But we have enough here already to highlight some issues...
 
 * When we introduced our second unit test which added constructor arguments to our `BlogPost` class we broke our first `Can_Construct_BlogPost` test. It didn't just fail, it wouldn't even compile.
 
@@ -159,14 +159,15 @@ As the number of tests grows, so does the amount of work we need to do to mainta
 
 We can also make some observations about the two BlogPost tests we wrote
 
-* **The BlogPost Can_Construct Does Not Care About The Test Data Used**  
+* **The BlogPost Can_Construct test does not need to care about the test data used**  
 \
 The BlogPost Can_Construct test does not even assert what the properties of the constructed blog post are, it only uses the test data to constructs an instance and prove it was constructed. Nothing more.
 \
 
-* **The Constructor_Initializes_BlogPost also does not care what the values of the constructor augments are.**  
+* **The Constructor_Initializes_BlogPost also does not care what the values of the constructor arguments are.**  
 \
 Hang on a minute, this is a little bit more interesting. We can see that the test asserts that the test data passed into the constructor becomes the values of the properties. So how can the test not be interested in the values ?  
+\
 Well I can say that because the test is to make sure that the properties are set to the values injected into the constructor. **What** the values are is irrelevant; what counts is that **valid arguments become property values**.
 
 ### Oops
