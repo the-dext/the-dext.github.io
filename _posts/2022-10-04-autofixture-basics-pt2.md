@@ -1,6 +1,7 @@
 ---
 layout: post
-title: AutoFixture Basics Part 2 - Using Simple Anonymous Data
+title: AutoFixture Basics
+subtitle: <span class='subtitle'>Part 2, Using Simple Anonymous Data</span>
 draft: false
 publish: true
 tags: C# dotNet TDD Test-Driven-Development
