@@ -16,7 +16,9 @@ In my previous article I setup a fictitious project to demonstrate how brittle u
 This is the complete opposite of what you want and need from unit tests, it's vital that unit tests are there to help you refactor with confidence, rather than discourage you from refactoring.
 
 In this second article I am going to demonstrate how the tests we wrote can be rewritten to use AutoFixture and anonymous data.
+
 <!--more-->
+
 ---
 ## Anonymous Data
 The main feature of AutoFixture is the ability to create anonymous data, but what is anonymous data?

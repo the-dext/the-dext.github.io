@@ -17,7 +17,9 @@ Thinking about scrapping unit tests completely ?
 
 In this blog series I'll show some problems in the way unit tests are often written, and how you can take advantage of AutoFixture to help you get back to having unit tests that are a benefit instead of a burden.
 My goal is that by the end of the series you will a good understanding of AutoFixture and its benefits, and that you will feel confident enough to use it in your own projects.
+
 <!--more-->
+
 ---
 ## So What is AutoFixture?
 AutoFixture is a library created by Mark Seemann to help developers write code in a TDD style, but it's just as relevant if you write your tests after the fact rather then TDD. 
