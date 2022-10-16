@@ -150,4 +150,4 @@ public void Constructor_Initializes_BlogPost()
 
 In this post we applied very basic application of AutoFixture to create anonymous instances of .net built-in types such as strings and dates.
 
-Our final tests are no longer explicitly defining values to use in the tests, but we can go a step further and simplify them much more. In part 3 I'll show you how.
+Our final tests are no longer explicitly defining values to use in the tests, but now that we have introduced AutoFixture we can use it to simplify them much more. In part 3 I'll show you how.
