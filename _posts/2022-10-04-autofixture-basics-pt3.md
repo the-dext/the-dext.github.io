@@ -10,13 +10,14 @@ excerpt_separator: <!--more-->
 
 ---
 
-# Using Complex Types with AutoFixture
-
 If you've been following this series you'll know that in part 2 we covered using AutoFixture to create anonymous data four our tests. In this article we will take another look at some of the unit tests in our project and see how we can use AutoFixture to create complex types.
 
 <!--more-->
 
 ---
+## Using Complex Types with AutoFixture
+AutoFixture allows creation of not just simple anonymous data, but also complex types populated with anonymous data, including complex type hierarchies. In this article we will revisit some of the tests from part 2 and see how we might apply complex types, and when we shouldn't.
+
 ## Recap
 
 In part 2 of this series I described how we could take a test that explicitly setup test data, and change it to use anonymous data by using AutoFixture.
