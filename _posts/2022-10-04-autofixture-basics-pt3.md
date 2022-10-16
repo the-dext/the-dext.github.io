@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AutoFixture Basics
-subtitle: <span class='subtitle'>Part 3, Simplifying Tests with Complex Types</span>
+subtitle: <span class='subtitle'>Part 3, Using Complex Types with AutoFixture</span>
 draft: false
 publish: true
 tags: C# dotNet TDD Test-Driven-Development
@@ -10,9 +10,9 @@ excerpt_separator: <!--more-->
 
 ---
 
-# Writing Unit Tests With Anonymous Data
+# Using Complex Types with AutoFixture
 
-If you've been following this series you'll know that in part 2 we covered using AutoFixture to create anonymous data four our tests. In this article we will take another look at some of the unit tests in our project and see how we can use AutoFixture to create complex types and how this will lead to simpler unit tests.
+If you've been following this series you'll know that in part 2 we covered using AutoFixture to create anonymous data four our tests. In this article we will take another look at some of the unit tests in our project and see how we can use AutoFixture to create complex types.
 
 <!--more-->
 
@@ -151,4 +151,4 @@ In a situation like the one demonstrated in the `Constructor_Initializes_BlogPos
 
 But the flawed example was certainly a lot shorter and easier to read. Isn't there a way to keep this test short but also have accurate assertions ?
 
-Yes, and in part 4 I'll show you how.
+Yes, in part 4 I'll show you how we can simplify this test without needing to compromise on our assertions.
