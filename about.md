@@ -19,8 +19,8 @@ I'm experienced in creating well structured software solutions including they ar
 
 I believe it's just as important to create maintainable software as it to deliver working software, and that software engineers have a responsibility to deliver solutions that businesses can take forward as their needs evolve.
 
-Currently I am working as a Principal Software Engineer for Nimble Approach, a software consultancy based in the north of England. If you would like to explore how Nimble Approach can help your business check out their [website](https://www.nimbleapproach.com) and please mention that you found them via my blog.
+Currently I am working as a Principal Software Engineer at Nimble Approach, a software consultancy based in the north of England. If you would like to explore how Nimble Approach can help your business check out their [website](https://www.nimbleapproach.com) and please mention that you found them via my blog.
 
 ### Contact me
 If you have an idea for an article, questions or feedback on my blog then please get in touch! I would love to hear from you.
-You can reach me using either [email](mailto:chris.dexter.blog@outlook.com?subject=Blog&map;Response) or [LinkedIn](https://www.linkedin.com/in/chris-dexter/).
+You can reach me using either [email](mailto:chris.dexter.blog@gmail.com?subject=Blog&map;Response) or [LinkedIn](https://www.linkedin.com/in/chris-dexter/).

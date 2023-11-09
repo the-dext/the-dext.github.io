@@ -9,5 +9,10 @@
         "organising",
         "Seemann",
         "typeof"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "tab.activeForeground": "#f6f7f8",
+        "tab.inactiveForeground": "#ffffff",
+        "tab.inactiveBackground": "#555555"
+    }
 }
